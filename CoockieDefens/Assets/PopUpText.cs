@@ -9,6 +9,7 @@ public class PopUpText : MonoBehaviour
 
     private void Start()
     {
+Debug.Log("Hey");
         Destroy(gameObject, 1.5f);
     }
     public void SetDamageText(int damage)
