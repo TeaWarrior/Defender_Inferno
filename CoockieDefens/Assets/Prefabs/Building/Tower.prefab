@@ -182,6 +182,7 @@ MonoBehaviour:
   armor:
     baseValue: 0
   popUpText_Prefab: {fileID: 1402143469848189168, guid: 9bb4df4df261d044fb5efae18d42effd, type: 3}
+  colliderOffset: 0
   range: 15
   attackSpeed: 1
   target: {fileID: 0}
@@ -282,7 +283,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 0}
   m_FillRect: {fileID: 7929374054648235884}
   m_HandleRect: {fileID: 0}
@@ -580,7 +581,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0.8773585, g: 0.21106264, b: 0.29314643, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -691,7 +692,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0.4528302, g: 0.0021359965, b: 0.16771682, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:

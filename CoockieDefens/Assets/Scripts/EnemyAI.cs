@@ -17,19 +17,21 @@ public class EnemyAI : CharacterStats,IDamagable
     private float fireCountdown = 0f;
     [SerializeField] private float moveSpeed;
     private bool gotPoint;
-   public bool isEndPath;
-
-
+    public bool isEndPath;
     public GameObject bulletPrephab;
     public Transform firePoint;
     private bool alreadyAttacked;
-
     private int pathIndex;
 
+    public Animator animator;
 
-    
+
+
+
+
 
     // Start is called before the first frame update
+ 
     private void Start()
     {
         InvokeRepeating("UpdateTarget", 0f, 0.5f);
@@ -70,6 +72,8 @@ public class EnemyAI : CharacterStats,IDamagable
     }
     public void Follow()
     {
+        animator.SetBool("isAttacking", false);
+        animator.SetBool("isWalking", true);
         Vector3 dir = target.position - transform.position;
         transform.Translate(dir.normalized * moveSpeed * Time.deltaTime, Space.World);
 
@@ -85,6 +89,7 @@ public class EnemyAI : CharacterStats,IDamagable
 
     private void AttackPlayer()
     {
+        animator.SetBool("isAttacking", true);
         //Make sure enemy doesn't move
         Vector3 dir = target.position - transform.position;
         Quaternion lookRotation = Quaternion.LookRotation(dir);
@@ -101,18 +106,32 @@ public class EnemyAI : CharacterStats,IDamagable
             alreadyAttacked = true;
         }
     }
-
-    public void Shoot()
+    bool isAttacking;
+    IEnumerator AnimationFixCorotine(float sec)
     {
+        isAttacking = true;
+        yield return new WaitForSeconds(sec);
         GameObject bullet = (GameObject)Instantiate(bulletPrephab, firePoint.position, firePoint.rotation);
         SimpleBullet simpleBullet = bulletPrephab.GetComponent<SimpleBullet>();
         simpleBullet.SetDamage(damage.GetValue());
-      /*  bulletScript bulletS = bullet.GetComponent<bulletScript>();
-        if (bulletS != null)
+        yield return new WaitForSeconds(sec);
+        animator.SetBool("isAttacking", false);
+        isAttacking = false;
+    }
+    public void Shoot()
+    {
+        if (!isAttacking)
         {
-            bulletS.damage = enemyDamage;
-            bulletS.Seek(target);
-        } */
+
+            StartCoroutine(AnimationFixCorotine(fireRate/2));
+          
+            /*  bulletScript bulletS = bullet.GetComponent<bulletScript>();
+              if (bulletS != null)
+              {
+                  bulletS.damage = enemyDamage;
+                  bulletS.Seek(target);
+              } */
+        }
     }
 
     private spawnerLogic spawnerScript;
@@ -133,6 +152,8 @@ public class EnemyAI : CharacterStats,IDamagable
     {
         if (gotPoint)
         {
+            animator.SetBool("isAttacking", false);
+            animator.SetBool("isWalking", true);
             Vector3 dir = pointToGo.position - transform.position;
             transform.Translate(dir.normalized * moveSpeed * Time.deltaTime, Space.World);
 
