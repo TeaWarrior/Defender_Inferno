@@ -136,3 +136,4 @@ Received Import Request.
 Start importing Assets/Graphyx/Imported/simple_low_poly_village_buildings/models using Guid(2e6a53aa20b7de6409d46b7cf3d73434) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3d2caf831a80cbb3b84c2c8499e66298') in 0.062235 seconds 
   Import took 0.144551 seconds .
 
+AssetImportWorkerClient::OnTransportError - code=2 error=End of file
